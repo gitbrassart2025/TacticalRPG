@@ -1,16 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class S_TurnSystem : MonoBehaviour
 {
     public int turnCount;
     public int playerCount;
+
     //array avec tous les joueurs
-    public float[] idPlayers;
     GameObject[] entityList;
+    public int activeEntity;
+    private bool trie;
+
+    GameObject EntityPlaying;
+
     //Dictionnaire qui contient les personnages et leurs informations relatives au tour + un vecteur jsp pk je fais ça mais ça peut servir heiiin
     private Dictionary<Vector3Int, GameObject> entitiesDictionary = new Dictionary<Vector3Int, GameObject>();
 
@@ -25,35 +29,78 @@ public class S_TurnSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            turnCount++;
-            Debug.Log("Compte +1");
-            for (int i = 0; i < entityList.Length; i++) 
-            {
-                Debug.Log(entityList[i]);
-            }
-
-            //TriInitiative(entitiesDictionary);
+            NouveauTour();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            NextPlayer(entityList);
         }
     }
 
     private void Awake()
     {
-        // Search for all waypoints. Warning, there is a 's' after Object.
+        //Trouve tous les gameobject avec le tag "entity" et les met dans la liste
         entityList = GameObject.FindGameObjectsWithTag("Entity");
+        EntityPlaying = entityList[activeEntity];
     }
 
-    /*
-    private void TriInitiative(List<GameObject> laListe)
+    public void NouveauTour()
     {
-        for (int i = 0; i < laListe.Count; i++) 
+        turnCount++;
+        activeEntity = 0;
+        Debug.Log("Compte +1");
+        Debug.Log("Joueur actif : " + activeEntity);
+
+        //Debug
+        /*for (int i = 0; i < entityList.Length; i++)
         {
-            for (int j = 0; j < laListe.Count; j++) 
+            Debug.Log("avant tri : " + entityList[i]);
+        }*/
+        TriInitiative(entityList);
+
+        //Debug
+        /*for (int i = 0; i < entityList.Length; i++)
+        {
+            Debug.Log("après tri : " + entityList[i]);
+        }*/
+    }
+
+    //Tri bulles parce que c'est rigolo les bulles
+    private void TriInitiative(GameObject[] laListe)
+    {
+        trie = false;
+        for (int i = 0; i < laListe.Length; i++) 
+        {
+            if (trie)
+                return;
+            for (int j = 0; j < laListe.Length - 1; j++) 
             {
-                if(laListe[i]. < laListe[j])
+                trie = true;
+                if(laListe[j+1].GetComponent<S_EntityTest>().speed > laListe[j].GetComponent<S_EntityTest>().speed)
                 {
-                    laListe.
+                    GameObject temp = laListe[j+1];
+                    laListe[j+1] = laListe[j];
+                    laListe[j] = temp;
+                    trie = false;
                 }
             }
         }
-    }*/
+    }
+
+    private void NextPlayer(GameObject[] laListe)
+    {
+        if (activeEntity < laListe.Length - 1)
+        {
+            activeEntity++;
+
+            //code pour passer au joueur d'après
+            EntityPlaying = laListe[activeEntity];
+
+            Debug.Log("Joueur actif : " + activeEntity);
+        }
+        else
+        {
+            NouveauTour();
+        }
+    }
 }
