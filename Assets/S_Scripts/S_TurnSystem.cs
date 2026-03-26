@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class S_TurnSystem : MonoBehaviour
@@ -10,7 +11,7 @@ public class S_TurnSystem : MonoBehaviour
     //array avec tous les joueurs
     GameObject[] entityList;
     public int activeEntity;
-    private bool trié;
+    private bool trie;
 
     GameObject EntityPlaying;
 
@@ -67,20 +68,20 @@ public class S_TurnSystem : MonoBehaviour
     //Tri bulles parce que c'est rigolo les bulles
     private void TriInitiative(GameObject[] laListe)
     {
-        trié = false;
+        trie = false;
         for (int i = 0; i < laListe.Length; i++) 
         {
-            if (trié)
+            if (trie)
                 return;
             for (int j = 0; j < laListe.Length - 1; j++) 
             {
-                trié = true;
+                trie = true;
                 if(laListe[j+1].GetComponent<S_EntityTest>().speed > laListe[j].GetComponent<S_EntityTest>().speed)
                 {
                     GameObject temp = laListe[j+1];
                     laListe[j+1] = laListe[j];
                     laListe[j] = temp;
-                    trié = false;
+                    trie = false;
                 }
             }
         }
