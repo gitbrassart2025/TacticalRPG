@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerSelection : MonoBehaviour
 {
     public Camera mainCamera;
-    public UIAttackMenu attackMenu;
+    // public UIAttackMenu attackMenu;
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class PlayerSelection : MonoBehaviour
 
                 if (unit != null)
                 {
-                    attackMenu.ShowMenu(unit);
+                    // attackMenu.ShowMenu(unit);
                 }
             }
         }

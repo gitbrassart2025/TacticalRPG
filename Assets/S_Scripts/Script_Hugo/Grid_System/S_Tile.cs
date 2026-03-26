@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class S_Tile : MonoBehaviour
+public class Tile : MonoBehaviour
 {
     public Vector2Int gridPosition; 
     
