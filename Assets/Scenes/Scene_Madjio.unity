@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 557791624}
   - component: {fileID: 557791626}
   - component: {fileID: 557791625}
+  - component: {fileID: 557791627}
   m_Layer: 5
   m_Name: PlayerHealthBar
   m_TagString: Untagged
@@ -671,7 +672,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557791623}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4612484fdcb9a2f4584c3e33167e8d30, type: 3}
   m_Name: 
@@ -729,6 +730,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &557791627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557791623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df73b1695a0d77740a22ea2cf3b95cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: "Assembly-CSharp::Syst\xE8me_de_sante"
+  maxHealth: 100
+  healthBar: {fileID: 557791626}
 --- !u!1 &631059389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: "Assembly-CSharp::Syst\xE8me_de_sante"
   maxHealth: 100
+  healthBar: {fileID: 1085780422}
 --- !u!114 &759441288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1560,6 +1576,7 @@ GameObject:
   - component: {fileID: 1085780421}
   - component: {fileID: 1085780422}
   - component: {fileID: 1085780423}
+  - component: {fileID: 1085780424}
   m_Layer: 5
   m_Name: EnemyHealthBar
   m_TagString: Untagged
@@ -1647,11 +1664,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085780420}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4612484fdcb9a2f4584c3e33167e8d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bar_de_vie
+  maxHealth: 100
+  healthBar: {fileID: 1085780422}
+--- !u!114 &1085780424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085780420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df73b1695a0d77740a22ea2cf3b95cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: "Assembly-CSharp::Syst\xE8me_de_sante"
   maxHealth: 100
   healthBar: {fileID: 1085780422}
 --- !u!1 &1110187128
@@ -1857,6 +1888,7 @@ GameObject:
   - component: {fileID: 1359644819}
   - component: {fileID: 1359644821}
   - component: {fileID: 1359644822}
+  - component: {fileID: 1359644823}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1969,6 +2001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   maxHealth: 100
+  healthBar: {fileID: 557791626}
 --- !u!114 &1359644820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1999,6 +2032,7 @@ MonoBehaviour:
   attacks:
   - {fileID: 1359644820}
   - {fileID: 1359644822}
+  - {fileID: 1359644823}
   maxActionPoints: 10
   target: {fileID: 759441287}
   actionPointsText: {fileID: 631059391}
@@ -2017,6 +2051,21 @@ MonoBehaviour:
   attackName: Feu
   damage: 20
   actionCost: 3
+--- !u!114 &1359644823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359644813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9728e91364ab94f811b279787bb4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Classe_Attack
+  attackName: Danse
+  damage: 10
+  actionCost: 7
 --- !u!1 &1394935072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,6 +2472,7 @@ GameObject:
   - component: {fileID: 1771848474}
   - component: {fileID: 1771848473}
   - component: {fileID: 1771848472}
+  - component: {fileID: 1771848475}
   m_Layer: 5
   m_Name: AttackButton_2
   m_TagString: Untagged
@@ -2493,7 +2543,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1771848473}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1771848475}
+        m_TargetAssemblyTypeName: AttackButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1771848473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,6 +2594,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771848470}
   m_CullTransparentMesh: 1
+--- !u!114 &1771848475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771848470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31902029faf382e4690a65c7347c67c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackButton
+  player: {fileID: 1359644821}
+  attackIndex: 2
 --- !u!1 &1889170561
 GameObject:
   m_ObjectHideFlags: 0
