@@ -1,12 +1,14 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro; // important
+using UnityEngine;
 
 public class PA : MonoBehaviour
 {
-    public List<AttackButton> attacks = new List<AttackButton>();
+    
+    public List<Classe_Attack> attacks = new List<Classe_Attack>();
 
-    public int maxActionPoints = 10;
+    public int maxActionPoints = 10
+        ;
     private int currentActionPoints;
 
     public Système_de_sante target;
@@ -24,7 +26,7 @@ public class PA : MonoBehaviour
         if (attackIndex < 0 || attackIndex >= attacks.Count)
             return;
 
-        AttackButton selectedAttack = attacks[attackIndex];
+        Classe_Attack selectedAttack = attacks[attackIndex];
 
         if (currentActionPoints >= selectedAttack.actionCost)
         {
@@ -48,7 +50,7 @@ public class PA : MonoBehaviour
     public void ResetActionPoints()
     {
         currentActionPoints = maxActionPoints;
-        UpdateUI(); //  mise à jour
+        UpdateUI(); // mise à jour
     }
 
     void UpdateUI()
@@ -56,6 +58,7 @@ public class PA : MonoBehaviour
         if (actionPointsText != null)
         {
             actionPointsText.text = "PA : " + currentActionPoints + " / " + maxActionPoints;
+            Debug.Log("PA mis à jour : " + currentActionPoints + " / " + maxActionPoints);
         }
     }
 }
